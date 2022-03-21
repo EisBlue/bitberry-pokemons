@@ -91,8 +91,8 @@ app.get('/pokemon', (req, res) => {
 
 app.get('/pokemon/:id', (req, res) => {
     const pokemonId = req.params.id;
-    sql = `select * from pokemon where id = ${pokemonId}`;
-    dbConnection.query(sql, (err, result) => {
+    sql = `select * from pokemon where id = ?`;
+    dbConnection.query(sql, [pokemonId], (err, result) => {
         if (err) {
             console.log('Can not fetch the requested pokemon' + err.message);
             return res.end(500, 'Can not fetch the requested pokemon');
